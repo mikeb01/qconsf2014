@@ -2,6 +2,7 @@ package com.lmax.qconsf2014.csv;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -22,7 +23,15 @@ public class CsvIteratorMain
     public double main() throws IOException
     {
         String filename = "2014-07-21-21-00-00-000-4001-bid-ask-tick-depth1.csv";
-        InputStream in = new BufferedInputStream(new FileInputStream(filename));
+        InputStream in;
+        try
+        {
+            in = new BufferedInputStream(new FileInputStream(filename));
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException("Run 'gunzip *.gz' before running this test");
+        }
         
         Iterable<String[]> parseAsIterable = CsvParser.parseAsIterable(filename, in);
         
