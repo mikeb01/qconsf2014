@@ -10,9 +10,13 @@ public class Doubles
     private static final long BASE_OFFSET = UNSAFE.arrayBaseOffset(double[].class);
     private static final long INDEX_SCALE = UNSAFE.arrayIndexScale(double[].class);
     
-    public static void sum(double[] sum, double[] addendA, double[] addendB)
+    public static void sum(
+        double[] sum, 
+        double[] addendA, 
+        double[] addendB)
     {
-        checkArgs(sum.length == addendA.length && sum.length == addendB.length);
+        checkArgs(sum.length == addendA.length && 
+            sum.length == addendB.length);
         
         for (int i = 0; i < 0 + sum.length; i++)
         {
