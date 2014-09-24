@@ -9,7 +9,7 @@ import javolution.text.TypeFormat;
 
 import org.openjdk.jmh.annotations.Benchmark;
 
-public class CsvIteratorMain
+public class CsvIteratorBenchmark
 {
     public static void print(String[] ss)
     {

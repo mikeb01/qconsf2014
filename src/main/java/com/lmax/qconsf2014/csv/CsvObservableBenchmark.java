@@ -7,7 +7,7 @@ import javolution.text.TypeFormat;
 
 import org.openjdk.jmh.annotations.Benchmark;
 
-public class CsvObservableMain
+public class CsvObservableBenchmark
 {
     @Benchmark
     public double main() throws IOException
