@@ -9,13 +9,13 @@ class CsvStateMachine
     private static final int LF = '\r';
 
     private final StringBuilder buffer = new StringBuilder();
-    private final CsvHandler handler;
+    private final CsvObservable<CharSequence> handler;
 
     private State state = State.START_ROW;
     private int row = 0;
     private int column = 0;
 
-    public CsvStateMachine(CsvHandler handler)
+    public CsvStateMachine(CsvObservable<CharSequence> handler)
     {
         this.handler = handler;
     }
@@ -38,7 +38,6 @@ class CsvStateMachine
                         break;
 
                     default:
-                        handler.onStartRow(row);
                         state = State.START_FIELD;
                         result = onChar(c);
                 }
@@ -52,19 +51,17 @@ class CsvStateMachine
                         break;
 
                     case ',': // Stay in START_FIELD state
-                        notifyValue();
+                        notifyValue(false);
                         break;
 
                     case LF:
                     case CR:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         state = State.START_ROW;
                         break;
 
                     case EOF:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         result = false;
                         break;
 
@@ -78,20 +75,18 @@ class CsvStateMachine
                 switch (c)
                 {
                     case ',':
-                        notifyValue();
+                        notifyValue(false);
                         state = State.START_FIELD;
                         break;
 
                     case LF:
                     case CR:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         state = State.START_ROW;
                         break;
 
                     case EOF:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         result = false;
                         break;
 
@@ -122,7 +117,7 @@ class CsvStateMachine
                 switch (c)
                 {
                     case ',':
-                        notifyValue();
+                        notifyValue(false);
                         state = State.START_FIELD;
                         break;
 
@@ -132,15 +127,13 @@ class CsvStateMachine
                         break;
 
                     case EOF:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         result = false;
                         break;
 
                     case LF:
                     case CR:
-                        notifyValue();
-                        notifyLine();
+                        notifyValue(true);
                         state = State.START_ROW;
                         break;
 
@@ -156,16 +149,9 @@ class CsvStateMachine
         return result;
     }
 
-    private void notifyLine()
+    private void notifyValue(boolean endOfLine)
     {
-        handler.onEndRow(row);
-        ++row;
-        column = 0;
-    }
-
-    private void notifyValue()
-    {
-        handler.onValue(row, column, buffer);
+        handler.onEvent(row, column, buffer, endOfLine);
         buffer.delete(0, buffer.length());
         ++column;
     }
