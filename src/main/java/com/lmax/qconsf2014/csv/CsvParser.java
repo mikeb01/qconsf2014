@@ -18,8 +18,7 @@ public class CsvParser
         handler.onComplete();
     }
 
-    public static Iterable<String[]> parseAsIterable(
-        String documentIdentifier, InputStream reader) throws IOException
+    public static Iterable<String[]> parseAsIterable(InputStream reader) throws IOException
     {
         return new Iterable<String[]>()
         {

@@ -21,7 +21,7 @@ public class CsvIteratorMain
     {
         InputStream in = Csv.load();
         
-        Iterable<String[]> parseAsIterable = CsvParser.parseAsIterable("filename", in);
+        Iterable<String[]> parseAsIterable = CsvParser.parseAsIterable(in);
         
         double spreadTotal = 0.0;
         long spreadCount = 0;
