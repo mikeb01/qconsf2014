@@ -48,6 +48,17 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.jnr</groupId>
+			<artifactId>jffi</artifactId>
+			<version>1.2.7</version>
+			<classifier>native</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jnr</groupId>
+			<artifactId>jffi</artifactId>
+			<version>1.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jnr</groupId>
 			<artifactId>jnr-ffi</artifactId>
 			<version>1.0.5</version>
 		</dependency>
