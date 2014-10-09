@@ -9,7 +9,8 @@ public class VectorMath
 {    
     public interface Avx
     {
-        void sum(Pointer c, Pointer a, Pointer b, int len);
+        void sum_avx(Pointer c, Pointer a, Pointer b, int len);
+        void sum_simple(Pointer c, Pointer a, Pointer b, int len);
     }
     
     private static final Avx AVX;
@@ -19,10 +20,17 @@ public class VectorMath
         AVX = LibraryLoader.create(Avx.class).load("target/native/libavx.so");
     }
 
-    public static void sum(OffHeapArray c, OffHeapArray a, OffHeapArray b)
+    public static void sumAvx(OffHeapArray c, OffHeapArray a, OffHeapArray b)
     {
         checkArgs(c.length() == a.length() && c.length() == b.length());
         
-        AVX.sum(c.getPointer(), a.getPointer(), b.getPointer(), a.length());
+        AVX.sum_avx(c.getPointer(), a.getPointer(), b.getPointer(), a.length());
+    }
+
+    public static void sumSimple(OffHeapArray c, OffHeapArray a, OffHeapArray b)
+    {
+        checkArgs(c.length() == a.length() && c.length() == b.length());
+        
+        AVX.sum_simple(c.getPointer(), a.getPointer(), b.getPointer(), a.length());
     }
 }

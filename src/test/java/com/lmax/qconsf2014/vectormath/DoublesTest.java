@@ -44,18 +44,31 @@ public class DoublesTest
     }
     
     @Test
-    public void shouldSumArray() throws Exception
+    public void shouldSumAvx() throws Exception
     {
 
         Doubles.sum(cArr, bArr, aArr);
-        VectorMath.sum(cBuf, aBuf, bBuf);
+        VectorMath.sumAvx(cBuf, aBuf, bBuf);
         
         for (int i = 0; i < size; i++)
         {
             assertThat("" + i, cBuf.get(i), is(cArr[i]));
         }
     }
-    
+
+    @Test
+    public void shouldSumSimple() throws Exception
+    {
+
+        Doubles.sum(cArr, bArr, aArr);
+        VectorMath.sumSimple(cBuf, aBuf, bBuf);
+        
+        for (int i = 0; i < size; i++)
+        {
+            assertThat("" + i, cBuf.get(i), is(cArr[i]));
+        }
+    }
+
     @Test
     public void shouldSumArrayOfSize7() throws Exception
     {
@@ -74,7 +87,7 @@ public class DoublesTest
         cBuf.fill(0.0);
         
         Doubles.sum(cArr, bArr, aArr);
-        VectorMath.sum(cBuf, aBuf, bBuf);
+        VectorMath.sumAvx(cBuf, aBuf, bBuf);
         
         for (int i = 0; i < size; i++)
         {

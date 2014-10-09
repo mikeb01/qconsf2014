@@ -38,18 +38,11 @@ public class CsvIteratorBenchmark
                 continue;
             }
             
-            try
-            {
-                double bid = TypeFormat.parseDouble(strings[1]);
-                double ask = TypeFormat.parseDouble(strings[3]);
-                
-                spreadTotal += (ask - bid);
-                spreadCount++;
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            double bid = TypeFormat.parseDouble(strings[1]);
+            double ask = TypeFormat.parseDouble(strings[3]);
+            
+            spreadTotal += (ask - bid);
+            spreadCount++;
         }
         
         return spreadTotal / spreadCount;

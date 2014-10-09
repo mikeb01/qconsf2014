@@ -24,7 +24,8 @@ public class CsvObservableBenchmark
             long spreadCount = 0;
             
             @Override
-            public void onEvent(int row, int column, CharSequence value, boolean endOfLine)
+            public void onEvent(
+                int row, int column, CharSequence value, boolean endOfLine)
             {
                 if (row == 0 || value.length() < 1)
                 {

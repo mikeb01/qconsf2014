@@ -66,9 +66,14 @@ public class ArraySumBenchmark
     @Benchmark
     public void timeSumAvx(Blackhole blackhole)
     {
-        VectorMath.sum(cBuf, aBuf, bBuf);
+        VectorMath.sumAvx(cBuf, aBuf, bBuf);
         blackhole.consume(c);
     }
     
-    
+    @Benchmark
+    public void timeSumSimple(Blackhole blackhole)
+    {
+        VectorMath.sumAvx(cBuf, aBuf, bBuf);
+        blackhole.consume(c);
+    }
 }
