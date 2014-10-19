@@ -1,3 +1,8 @@
+/*
+ * Written by Michael Barker, and released to the public domain,
+ * as explained at http://creativecommons.org/publicdomain/zero/1.0/
+ */
+
 #include <immintrin.h>
 
 void sum_avx(double* c, double* a, double* b, int len)
@@ -20,3 +25,5 @@ void sum_simple(double* c, double* a, double* b, int len)
     	c[i] = a[i] + b[i];
     }
 }
+
+Nitsan Wakart
