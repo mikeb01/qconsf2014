@@ -1,3 +1,8 @@
+/*
+ * Written by Michael Barker, and released to the public domain,
+ * as explained at http://creativecommons.org/publicdomain/zero/1.0/
+ */
+
 package com.lmax.qconsf2014.csv;
 
 enum State
