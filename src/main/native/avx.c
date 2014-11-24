@@ -25,5 +25,3 @@ void sum_simple(double* c, double* a, double* b, int len)
     	c[i] = a[i] + b[i];
     }
 }
-
-Nitsan Wakart
